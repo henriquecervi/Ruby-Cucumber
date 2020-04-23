@@ -12,12 +12,12 @@ Dado("que o produto desejado é o {string}") do |produto|
   end
   
   Então("{int} unidade deste item deve ser adicionado ao carrinho") do |quantidade|
-    cart = find(".box-body")
+    cart = find("#shopping-cart")
     expect(cart).to have_text "(#{quantidade}x) #{@produto_nome}" # interpolação de string
   end
   
   Então("o valor total deve ser de {string}") do |valor_total|
-    cart = find("#cart")
-    expect(cart).to have_text valor_total
-    sleep 3
+    cart = find("#shopping-cart")
+    total = cart.find("tr", text: "Total").find("td")
+    expect(total.text).to eql valor_total
   end
