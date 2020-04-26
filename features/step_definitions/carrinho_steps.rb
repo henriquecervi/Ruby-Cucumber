@@ -49,11 +49,9 @@ Dado("que o produto desejado é o {string}") do |produto|
 
   Dado("que eu tenho os seguintes itens no carrinho:") do |table|
     @product_list = table.hashes
-    @product_list.each do |p|
-      p["quantidade"].to_i.times do
-        find(".menu-item-info-box", text: p["nome"].upcase).find(".add-to-cart").click  
-      end
-    end
+    steps %{
+      Quando eu adiciono todos os itens 
+    } # isso se chama dynamics steps, ele está puxando esse BDD, pois o código é o mesmo
   end
   
 
@@ -70,6 +68,10 @@ Dado("que o produto desejado é o {string}") do |produto|
       cart = find('#shopping-cart')
       cart.all("table tbody tr")[idx].find(".danger").click
     end
+  end
+
+  Quando("eu limpo o meu carrinho") do
+    click_button "Limpar"
   end
   
   Então("vejo a seguinte mensagem no carrinho {string}") do |mensagem|
