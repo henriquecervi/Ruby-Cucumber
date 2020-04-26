@@ -44,3 +44,36 @@ Dado("que o produto desejado é o {string}") do |produto|
       expect(cart).to have_text "(#{p["quantidade"]}x) #{p["nome"]}"
     end
   end
+
+  # removendo item do carrinho
+
+  Dado("que eu tenho os seguintes itens no carrinho:") do |table|
+    @product_list = table.hashes
+    @product_list.each do |p|
+      p["quantidade"].to_i.times do
+        find(".menu-item-info-box", text: p["nome"].upcase).find(".add-to-cart").click  
+      end
+    end
+  end
+  
+
+  Quando("eu remover somente o {int}") do |item|
+    cart = find('#shopping-cart')
+    cart.all("table tbody tr")[item].find(".danger").click
+  end
+
+
+  # removendo todos os itens do carrinho
+
+  Quando("eu remover todos os itens") do
+    @product_list.each_with_index do |value, idx|
+      cart = find('#shopping-cart')
+      cart.all("table tbody tr")[idx].find(".danger").click
+    end
+  end
+  
+  Então("vejo a seguinte mensagem no carrinho {string}") do |mensagem|
+    cart = find('#shopping-cart')
+    expect(cart).to have_text mensagem
+  end
+  

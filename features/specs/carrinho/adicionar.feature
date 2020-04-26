@@ -23,7 +23,6 @@ Cenario: Adicionar duas unidades ao carrinho
     Então 2 unidade(s) deste item deve ser adicionado ao carrinho
     E o valor total deve ser de "R$ 5,00"
 
-@temp
 Cenario: Adicionar varios itens ao carrinho
 
     Dado que os produtos desejados são:

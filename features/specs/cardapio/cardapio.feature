@@ -5,11 +5,12 @@ Funcionalidade: Cardápio
     Sendo um usuário que escolheu um restaurante
     Posso acessar o cardápio
 
-
-    @cardapio
-    Cenario: Cardápio
-
+    Contexto: Restaurantes
         Dado que acesso a lista de restaurantes
+
+
+
+    Cenario: Cardápio
         Quando eu escolho o restaurante "Burger House"
         Então vejo os seguintes itens disponíveis no cardápio
 
@@ -18,7 +19,6 @@ Funcionalidade: Cardápio
             | Batatas Fritas | Batatas fritas crocantes       | R$ 5,50  |
             | Refrigerante   | O refri mais gelado da cidade. | R$ 4,50  |
 
-    Cenario: Carrinho vazio
-        Dado que acesso a lista de restaurantes
+    Cenario: Carrinho vazio        
         Quando eu escolho o restaurante "Burger House"
         Então vejo a seguinte mensagem no carrinho "Seu carrinho está vazio!" 
