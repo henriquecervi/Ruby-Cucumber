@@ -11,7 +11,7 @@ Funcionalidade: Remover itens do carrinho
            | nome                   | preço    | quantidade |
            | Cup Cake               | R$ 8,70  | 1          |
            | Donut                  | R$ 2,50  | 1          |
-          # | Pão Artesanal Italiano | R$ 15.90 | 1          |
+           | Pão Artesanal Italiano | R$ 15,90 | 1          |
 
     Esquema do Cenario: Remover itens
          
@@ -20,9 +20,9 @@ Funcionalidade: Remover itens do carrinho
 
         Exemplos:
         |item | total      |
-        | 0   | "R$ 2,50" |
-        | 1   | "R$ 8,70" |
-       # | 2   | "R$ 11,20" |
+        | 0   | "R$ 18,40" |
+        | 1   | "R$ 24,60" |
+        | 2   | "R$ 11,20" |
 
     Cenario: Remover todos os itens         
         Quando eu remover todos os itens
