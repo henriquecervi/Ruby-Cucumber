@@ -12,16 +12,16 @@ Dado("que tenho uma lista de restaurantes") do
 end
 
 Quando("acesso a lista de restaurantes") do
- visit '/restaurants'
+ @rest_list_page.load
 end
   
 Então("vejo todas as opções disponíveis") do
-  restaurantes = all('.restaurant-item') # o metodo all devolve um array.
+  restaurantes = @rest_list_page.list 
   expect(restaurantes.size).to be > 0
 end
   
 Então("cada restaurante deve exibir sua categoria") do
-  restaurantes = all('.restaurant-item') # pega todos os restaurantes com todas informações
+  restaurantes = @rest_list_page.list # pega todos os restaurantes com todas informações
 
   @restaurants_data.each_with_index do |value, index| # faz uma "varredura" por index
     expect(restaurantes[index]).to have_text value[:category] # fazemos a expectativa pelo que queremos.
@@ -29,7 +29,7 @@ Então("cada restaurante deve exibir sua categoria") do
 end
   
 Então("cada restaurante deve exibir o tempo de entrega") do
-  restaurantes = all('.restaurant-item')
+  restaurantes = @rest_list_page.list
 
   @restaurants_data.each_with_index do |value, index|
     expect(restaurantes[index]).to have_text value[:delivery_time]
@@ -37,7 +37,7 @@ Então("cada restaurante deve exibir o tempo de entrega") do
 end
   
 Então("cada restaurante deve exibir sua nota de avaliação") do
-  restaurantes = all('.restaurant-item')
+  restaurantes = @rest_list_page.list
 
   @restaurants_data.each_with_index do |value, index|
     expect(restaurantes[index]).to have_text value[:rating]
@@ -47,7 +47,7 @@ end
 ############ Scenario Outline #############
 
 Então("cada restaurante deve ter {int} {string} {string} {string} {float}") do |id, name, category, delivery_time, rating|
-  restaurantes = all('.restaurant-item')
+  restaurantes = @rest_list_page.list
 
   expect(restaurantes[id]).to have_text name.upcase  
   expect(restaurantes[id]).to have_text category
@@ -65,7 +65,7 @@ Dado("que eu tenho uma lista de restaurantes") do |table|
 end
 
 Então("devo ver todos os restaurantes desta lista") do
-  restaurantes = all('.restaurant-item')
+  restaurantes = @rest_list_page.list
 
   @restaurants_data.each_with_index do |value ,index |
     expect(restaurantes[index]).to have_text value ['nome'].upcase  # precisamos converter para maísculo por que no site está assim

@@ -1,14 +1,14 @@
 Dado("que acesso a lista de restaurantes") do
-    visit '/restaurants'
+    @rest_list_page.load
   end
   
   Quando("eu escolho o restaurante {string}") do |restaurante|
-    find(".restaurant-item", text: restaurante.upcase).click
+    @rest_list_page.go(restaurante)
   end
   
   Então("vejo os seguintes itens disponíveis no cardápio") do |table|
     # table is a Cucumber::MultilineArgument::DataTable
-    items = all(".menu-item-info-box")
+    items = @rest_page.menu
 
     product_data = table.hashes
 
@@ -22,7 +22,7 @@ Dado("que acesso a lista de restaurantes") do
   Então("eu vejo as seguintes informações adicionais:") do |table|
     # table is a Cucumber::MultilineArgument::DataTable
     infos = table.rows_hash # nesse caso estamos utilizando a tabela em formato de linhas, não de coluna
-    detail = find('#detail')
+    detail = @rest_page.details
     expect(detail).to have_text infos['categoria']  
     expect(detail).to have_text infos['descrição'] 
     expect(detail).to have_text infos['horários'] 
