@@ -71,4 +71,29 @@ Dado("que o produto desejado é o {string}") do |produto|
   Então("vejo a seguinte mensagem no carrinho {string}") do |mensagem|
     expect(@rest_page.cart.box).to have_text mensagem
   end
+
+  Dado("que adicionei os seguintes itens no carrinho:") do |table|
+    @product_list = table.hashes
+    steps %{
+      Quando eu adiciono todos os itens
+    } #dynamics steps (%{ e o nome do STEP que deseja rodar})
+  end
+  
+  Quando("eu fecho o meu carrinho") do
+    @rest_page.cart.close_pedido
+  end
+  
+  Então("o valor total do itens deve ser igual a {string}") do |total_itens|
+    expect(@order_page.valor_total[0]).to have_text total_itens
+    #utilizamos o have_text pois o eql não consegue verificar, visto que ele trás muitas informações
+    # na linha que contém o tr.
+  end
+  
+  Então("o valor do frete deve ser igual a {string}") do |frete|
+    expect(@order_page.valor_total[1]).to have_text frete
+  end
+  
+  Então("o valor total da compra deve ser igual a {string}") do |total_compra|
+    expect(@order_page.valor_total[2]).to have_text total_compra
+  end
   
