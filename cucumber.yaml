@@ -1,0 +1,5 @@
+--- #esses três -, definem que é um arquivo yaml.
+default: -p html -p dot
+bdd: --format pretty # formato do cmder em bdd
+dot: --format progress # formato do cmder com apenas ... para OK e F para falha
+html: --format html --out=log/report.html 
