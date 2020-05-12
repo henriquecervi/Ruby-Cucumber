@@ -1,4 +1,6 @@
-    
+    require "base64"
+
+
     Before do
         page.current_window.resize_to(1440, 900)
 
@@ -14,4 +16,10 @@
 
     Before("@green_food") do
         visit '/restaurants/green-food/menu'
+    end
+
+    After do
+        shot_file = page.save_screenshot("log/screenshot.png") # tirando o screenshot
+        shot_b64 = Base64.encode64(File.open(shot_file, "rb").read) # convertendo ele para base64
+        embed(shot_b64, "image/png", "Screenshot") #Cucumber anexa o screenshot ao report.
     end
