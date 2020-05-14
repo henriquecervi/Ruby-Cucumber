@@ -18,8 +18,10 @@
         visit '/restaurants/green-food/menu'
     end
 
-    After do
-        shot_file = page.save_screenshot("log/screenshot.png") # tirando o screenshot
-        shot_b64 = Base64.encode64(File.open(shot_file, "rb").read) # convertendo ele para base64
-        embed(shot_b64, "image/png", "Screenshot") #Cucumber anexa o screenshot ao report.
+    After do |scenario|
+        #if scenario.failed?     -> tira print apenas se o cenário falha
+            shot_file = page.save_screenshot("log/screenshot.png") # tirando o screenshot
+            shot_b64 = Base64.encode64(File.open(shot_file, "rb").read) # convertendo ele para base64
+            embed(shot_b64, "image/png", "Screenshot") #Cucumber anexa o screenshot ao report.
+        #end    -> end do if
     end
