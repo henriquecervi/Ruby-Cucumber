@@ -2,4 +2,8 @@
 default: -p dot
 bdd: --format pretty # formato do cmder em bdd
 dot: --format progress # formato do cmder com apenas ... para OK e F para falha
-html: --format html --out=log/report.html 
+html: --format html --out=log/report.html   
+chrome: -p dot BROWSER=chrome
+firefox: -p dot BROWSER=firefox
+chrome_headless: -p dot BROWSER=chrome_headless
+firefox_headless: -p dot BROWSER=firefox_headless
